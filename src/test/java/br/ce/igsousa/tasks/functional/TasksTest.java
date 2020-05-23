@@ -44,6 +44,29 @@ public class TasksTest {
 		}
 	}
 	
-	
+	@Test
+	public void naoDeveSalvarTarefaSemDescricao() {
+		WebDriver driver = acessarAplicacao();
+		try {
+		
+			//clicar em add Todo
+			driver.findElement(By.id("addTodo")).click();
+			
+			
+			//escrever a desc da task
+			driver.findElement(By.id("dueDate")).sendKeys("10/10/2020");
+			//escrever a data
+			
+			//clicar em salvar
+			driver.findElement(By.id("saveButton")).click();
+			
+			//validar mensagem de sucesso
+			String message = driver.findElement(By.id("message")).getText();
+			Assert.assertEquals("Fill the task description", message);
+		} finally {
+			//fechar browser
+			driver.quit();
+		}
+	}
 	
 }
